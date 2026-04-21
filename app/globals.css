@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+
+:root {
+  /* Backgrounds: Professional Deep Navy/Slate (Trust, Structure, Corporate) */
+  --background-primary: #0f172a; 
+  --background-secondary: rgba(30, 41, 59, 0.85); 
+  --background-tertiary: rgba(30, 41, 59, 0.35);
+
+  /* Accents: Sky Blue (Tech/Air Freight), Emerald (Sustainability), Amber (Transit/Warehousing) */
+  --accent-primary: #0ea5e9; /* Vibrant Sky Blue */
+  --accent-primary-70: #0ea5e970; /* Vibrant Sky Blue */
+  --accent-primary-30: #0ea5e930; /* Vibrant Sky Blue */
+  --accent-neutral: #cbd5e1; /* Light Slate for neutral UI elements */
+  --accent-secondary: #10b981; /* Emerald Green */
+  --accent-secondary-70: #10b98170; /* Emerald Green */
+  --accent-secondary-30: #10b98130; /* Emerald Green */
+  --accent-tertiary: #f59e0b; /* Amber/Orange */
+
+  /* Typography: High contrast for readability */
+  --text-primary: #f8fafc; /* Crisp Off-White */
+  --text-secondary: #94a3b8; /* Muted Slate Gray */
+
+  /* Borders and UI Structure */
+  --border-primary: rgba(255, 255, 255, 0.1); 
+
+  /* Buttons: Inviting, professional calls-to-action */
+  --button-background-primary: #0ea5e9;
+  --button-text-primary: #ffffff;
+  --button-accent-primary: #0284c7; /* Deeper blue for hover states */
+
+  /* Shadows: Grounded and less neon */
+  --shadow-accent-primary: rgba(14, 165, 233, 0.3); /* Subtle blue glow */
+  --shadow-primary: rgba(0, 0, 0, 0.4); /* Deep drop shadow for depth */
+}
+
+#purple-theme {
+  --background-primary: #0a0519; /* Deep Slate */
+  --background-secondary: #0e062594;
+  --background-tertiary: #0e062539;
+  --accent-primary: rgba(115, 45, 255, 1); /*cyan*/
+  --accent-neutral: #b9cac9; /*Desaturated Teal*/
+  --accent-secondary: rgba(195, 45, 255, 1);
+  --accent-tertiary: #00e676;
+  --text-primary: #ffffff; /*white*/
+  --text-secondary: #8892b0; /*slate gray*/
+  --border-primary: rgba(255, 255, 255, 0.05); /*Black 0.05*/
+  --button-background-primary: #fff;
+  --button-text-primary: #003737;
+  --button-accent-primary: #e800c8;
+  --shadow-accent-primary: #9D00FF;
+  --shadow-primary: #2c0e4a;
+}
+
+#orange-theme {
+  /* Backgrounds: Industrial Charcoal & Steel */
+  --background-primary: #121212; 
+  --background-secondary: rgba(39, 39, 42, 0.85); 
+  --background-tertiary: rgba(39, 39, 42, 0.35);
+
+  /* Accents: High-Vis Orange, Steel Gray, Alert Yellow */
+  --accent-primary: #f97316; /* High-Vis Orange */
+  --accent-primary-70: rgba(249, 115, 22, 0.7); 
+  --accent-primary-30: rgba(249, 115, 22, 0.3); 
+  --accent-neutral: #a1a1aa; /* Steel Gray */
+  --accent-secondary: #3b82f6; /* Transit Blue */
+  --accent-secondary-70: rgba(59, 130, 246, 0.7); 
+  --accent-secondary-30: rgba(59, 130, 246, 0.3); 
+  --accent-tertiary: #eab308; /* Forklift/Alert Yellow */
+
+  /* Typography */
+  --text-primary: #ffffff; 
+  --text-secondary: #a1a1aa; 
+
+  /* Borders and UI Structure */
+  --border-primary: rgba(255, 255, 255, 0.08); 
+
+  /* Buttons */
+  --button-background-primary: #f97316;
+  --button-text-primary: #000000; /* Dark text for contrast against orange */
+  --button-accent-primary: #ea580c; 
+
+  /* Shadows */
+  --shadow-accent-primary: rgba(249, 115, 22, 0.25); 
+  --shadow-primary: rgba(0, 0, 0, 0.5); 
+}
+
+#green-theme {
+  /* Backgrounds: Deep Pine / Midnight Green */
+  --background-primary: #06120f; 
+  --background-secondary: rgba(13, 33, 28, 0.85); 
+  --background-tertiary: rgba(13, 33, 28, 0.35);
+
+  /* Accents: Eco Green, Earthy Gold, Clean Teal */
+  --accent-primary: #22c55e; /* Vibrant Eco Green */
+  --accent-primary-70: rgba(34, 197, 94, 0.7); 
+  --accent-primary-30: rgba(34, 197, 94, 0.3); 
+  --accent-neutral: #9ca3af; 
+  --accent-secondary: #eab308; /* Earthy Gold for metrics */
+  --accent-secondary-70: rgba(234, 179, 8, 0.7); 
+  --accent-secondary-30: rgba(234, 179, 8, 0.3); 
+  --accent-tertiary: #14b8a6; /* Clean Teal for digital tracking */
+
+  /* Typography */
+  --text-primary: #f0fdf4; 
+  --text-secondary: #94a3b8; 
+
+  /* Borders and UI Structure */
+  --border-primary: rgba(34, 197, 94, 0.15); 
+
+  /* Buttons */
+  --button-background-primary: #22c55e;
+  --button-text-primary: #022c22; 
+  --button-accent-primary: #16a34a; 
+
+  /* Shadows */
+  --shadow-accent-primary: rgba(34, 197, 94, 0.2); 
+  --shadow-primary: rgba(0, 0, 0, 0.4); 
+}
+
+#blue-red {
+  /* Backgrounds: Midnight Ocean */
+  --background-primary: #020617; 
+  --background-secondary: rgba(15, 23, 42, 0.85); 
+  --background-tertiary: rgba(15, 23, 42, 0.35);
+
+  /* Accents: Cyan (Water), Coral (Cargo), Silver */
+  --accent-primary: #06b6d4; /* Deep Sea Cyan */
+  --accent-primary-70: rgba(6, 182, 212, 0.7); 
+  --accent-primary-30: rgba(6, 182, 212, 0.3); 
+  --accent-neutral: #cbd5e1; 
+  --accent-secondary: #f43f5e; /* Container Coral/Red */
+  --accent-secondary-70: rgba(244, 63, 94, 0.7); 
+  --accent-secondary-30: rgba(244, 63, 94, 0.3); 
+  --accent-tertiary: #3b82f6; 
+
+  /* Typography */
+  --text-primary: #ffffff; 
+  --text-secondary: #64748b; 
+
+  /* Borders and UI Structure */
+  --border-primary: rgba(255, 255, 255, 0.05); 
+
+  /* Buttons */
+  --button-background-primary: #06b6d4;
+  --button-text-primary: #000000; 
+  --button-accent-primary: #0891b2; 
+
+  /* Shadows */
+  --shadow-accent-primary: rgba(6, 182, 212, 0.3); 
+  --shadow-primary: rgba(0, 0, 0, 0.6); 
+}
+
+#white-blue {
+  /* Backgrounds: Clean White and Light Gray */
+  --background-primary: #f8fafc; 
+  --background-secondary: rgba(255, 255, 255, 0.85); 
+  --background-tertiary: rgba(241, 245, 249, 0.6);
+
+  /* Accents: Corporate Navy, Reliable Blue, Success Green */
+  --accent-primary: #2563eb; /* Corporate Blue */
+  --accent-primary-70: rgba(37, 99, 235, 0.7); 
+  --accent-primary-30: rgba(37, 99, 235, 0.3); 
+  --accent-neutral: #64748b; 
+  --accent-secondary: #10b981; /* Success Green */
+  --accent-secondary-70: rgba(16, 185, 129, 0.7); 
+  --accent-secondary-30: rgba(16, 185, 129, 0.3); 
+  --accent-tertiary: #ef4444; /* Alert Red */
+
+  /* Typography: Dark text for light mode */
+  --text-primary: #0f172a; 
+  --text-secondary: #475569; 
+
+  /* Borders and UI Structure */
+  --border-primary: rgba(0, 0, 0, 0.1); 
+
+  /* Buttons */
+  --button-background-primary: #2563eb;
+  --button-text-primary: #ffffff; 
+  --button-accent-primary: #1d4ed8; 
+
+  /* Shadows: Softer and lighter for white backgrounds */
+  --shadow-accent-primary: rgba(37, 99, 235, 0.2); 
+  --shadow-primary: rgba(0, 0, 0, 0.05); 
+}
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #eae6ff rgba(0, 0, 0, 0); /* thumb color, track color */
+  
+}
+
+.primary-background {
+  background:
+    radial-gradient(circle 30vw at 10% 10%, var(--accent-primary-70), transparent),
+    radial-gradient(circle 30vw at 90% 90%, var(--accent-primary-70), transparent), var(--background-primary);
+}
+
+.primary-accent-button {
+  @apply rounded-full font-semibold;
+
+  position: relative;
+  background: linear-gradient(to right, var(--accent-primary) 60%, var(--accent-secondary) 90%);
+}
+
+
+@keyframes animateOpacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.primary-accent-button:hover::before,
+.primary-accent-button:hover::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  height: 100%;
+  animation: animateOpacity 0.2s linear forwards;
+  opacity: 0;
+}
+
+.primary-accent-button:hover::before {
+  left: 0;
+  width: 74%;
+  border-radius: 999px 0 0 999px;
+  box-shadow:
+    0 0 6px 2px var(--accent-primary),
+    0 0 12px 4px var(--accent-primary-70),
+    0 0 20px 6px var(--accent-primary-30);
+}
+
+.primary-accent-button:hover::after {
+  right: 0;
+  width: 24%;
+  border-radius: 0 999px 999px 0;
+  box-shadow:
+    0 0 6px 2px var(--accent-secondary),
+    0 0 12px 4px var(--accent-primary-70),
+    0 0 20px 6px var(--accent-primary-30);
+}

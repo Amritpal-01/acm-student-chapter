@@ -1,0 +1,6 @@
+export const studenthubRoute = '/student-hub'
+export const aboutRoute = '/about'
+export const applicationRoute = '/application'
+export const contactRoute = '/contact'
+export const eventsRoute = '/events'
+export const homeRoute = '/'
