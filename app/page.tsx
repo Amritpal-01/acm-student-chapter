@@ -14,7 +14,7 @@ import {
   ArrowRight,
   LucideIcon,
 } from "lucide-react";
-import { applicationRoute } from "@/constants/routes";
+import { aboutRoute, applicationRoute } from "@/constants/routes";
 import { SCM_THEME } from "@/constants/theme";
 
 interface PillarCardProps {
@@ -218,8 +218,8 @@ const page = () => {
             <Link href={applicationRoute}>
               <PrimaryButton text="Become a member" />
             </Link>
-            <Link href={"#"}>
-              <TertiaryButton text="View events  →" />
+            <Link href={aboutRoute}>
+              <TertiaryButton text="About Us  →" />
             </Link>
           </div>
         </div>
@@ -352,9 +352,9 @@ const page = () => {
                 future.
               </p>
 
-              <button className="px-6 py-3.5 bg-white/5 hover:bg-[#20252e] border border-white/10 rounded-lg text-white text-xs tracking-wider uppercase transition-all flex items-center gap-2 group/btn">
+              {/* <button className="px-6 py-3.5 bg-white/5 hover:bg-[#20252e] border border-white/10 rounded-lg text-white text-xs tracking-wider uppercase transition-all flex items-center gap-2 group/btn">
                 Request Portal Access
-              </button>
+              </button> */}
             </div>
           </div>
 

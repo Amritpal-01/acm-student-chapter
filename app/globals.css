@@ -190,6 +190,38 @@
   
 }
 
+.primary-button {
+  background: var(--button-background-primary);
+  color: var(--button-text-primary);
+  font-weight: 600;
+  font-size: 0.875rem; /* text-sm */
+  padding: 0.5rem 1.25rem; /* py-2 px-5 */
+  border-radius: 0.125rem; /* rounded-sm */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* scale-on-hover */
+.primary-button:hover {
+  transform: scale(1.05);
+}
+
+/* render-animation (assuming simple fade/appear) */
+.primary-button {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 .primary-background {
   background:
     radial-gradient(circle 30vw at 10% 10%, var(--accent-primary-70), transparent),

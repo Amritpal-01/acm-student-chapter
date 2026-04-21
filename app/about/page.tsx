@@ -20,6 +20,8 @@ import {
   BrainCircuit,
   Star,
 } from "lucide-react";
+import Link from "next/link";
+import { aboutRoute, applicationRoute } from "@/constants/routes";
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -229,7 +231,8 @@ export default function ACMPage() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-          <button
+          <Link
+            href={applicationRoute}
             className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-all duration-200 active:scale-95 hover:opacity-90"
             style={{
               background: "var(--button-background-primary)",
@@ -238,10 +241,10 @@ export default function ACMPage() {
             }}
           >
             Join the Chapter <ArrowRight className="w-4 h-4" />
-          </button>
-          <button className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold border border-(--border-primary) text-(--text-secondary) hover:text-(--text-primary) hover:border-white/20 transition-all duration-200">
-            <Calendar className="w-4 h-4" /> Upcoming Events
-          </button>
+          </Link>
+          <Link href={aboutRoute} className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold border border-(--border-primary) text-(--text-secondary) hover:text-(--text-primary) hover:border-white/20 transition-all duration-200">
+            <Calendar className="w-4 h-4" /> About us
+          </Link>
         </div>
 
         {/* scroll cue */}
@@ -378,7 +381,7 @@ export default function ACMPage() {
                   Locally, we're a crew of curious, driven students who believe great software comes from great communities.
                   Whether you write code every day or you're still learning what a compiler does — you belong here.
                 </p>
-                <button
+                {/* <button
                   className="inline-flex items-center gap-2 w-fit rounded-full py-3 text-sm font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
                   style={{
                     background: "var(--button-background-primary)",
@@ -387,7 +390,7 @@ export default function ACMPage() {
                   }}
                 >
                   Meet the Team <ArrowRight className="w-4 h-4" />
-                </button>
+                </button> */}
               </div>
 
               {/* visual accent panel */}
@@ -445,7 +448,8 @@ export default function ACMPage() {
               or just show up curious — that's how it always starts.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
+              <Link
+                href={applicationRoute}
                 className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
                 style={{
                   background: "var(--button-background-primary)",
@@ -454,10 +458,7 @@ export default function ACMPage() {
                 }}
               >
                 <Users className="w-4 h-4" /> Become a Member
-              </button>
-              <button className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold border border-(--border-primary) text-(--text-secondary) hover:text-(--text-primary) hover:border-white/20 transition-all duration-200">
-                <Code2 className="w-4 h-4" /> View Projects
-              </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -9,19 +9,9 @@ const menuItems: menuItemType[] = [
     url: applicationRoute
   },
   {
-    name: "events",
-    icon: CalendarIcon ,
-    url: eventsRoute
-  },
-  {
     name: "about",
     icon: InfoIcon ,
     url: aboutRoute
-  },
-  {
-    name: "contact",
-    icon: MessageSquareDotIcon ,
-    url: contactRoute
   },
 ]
 

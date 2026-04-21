@@ -1,38 +1,46 @@
 "use client";
 import PrimaryButton from "@/components/PrimaryButton";
-import { useState } from "react";
+import {
+  BriefcaseIcon,
+  ChevronDownCircleIcon,
+  CpuIcon,
+  LucideIcon,
+  MegaphoneIcon,
+  PaintbrushIcon,
+} from "lucide-react";
+import { useState, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type roleType = {
   title: string;
   description: string;
+  Icon: LucideIcon;
 };
 
 const roles: roleType[] = [
   {
-    title: "Webmaster",
+    title: "Content Team Lead",
     description:
-      "Architect and maintain the chapter's digital infrastructure and web presence.",
+      "Drive the chapter’s storytelling strategy and manage social media channels to build brand authority and keep the community engaged.",
+    Icon: MegaphoneIcon,
   },
   {
-    title: "Membership Chair",
+    title: "Design Team Lead",
     description:
-      "Drive recruitment, manage member data, and foster a thriving community environment.",
+      "Define the visual identity and UI/UX standards while leading a creative team to ensure assets are professional and accessible.",
+    Icon: PaintbrushIcon,
   },
   {
-    title: "Publicity Chair",
+    title: "Management Team Lead",
     description:
-      "Manage social media channels, design promotional materials, and build brand awareness.",
+      "Orchestrate the operational engine of the chapter, focusing on logistics and ensuring every technical and social event runs seamlessly.",
+    Icon: BriefcaseIcon,
   },
   {
-    title: "Event Coordinator",
+    title: "Technical Team Lead",
     description:
-      "Plan logistics, secure venues, and execute flawless technical and social events.",
-  },
-  {
-    title: "echnical Lead",
-    description:
-      "Spearhead coding workshops, hackathons, and curate advanced technical content.",
+      "Spearhead technical workshops and coding challenges to bridge the gap between classroom theory and real-world software engineering.",
+    Icon: CpuIcon,
   },
 ];
 
@@ -41,36 +49,89 @@ type applicationPayloadType = {
   full_name: string;
   justification: string;
   skill: string[];
+  course_name: string;
+  study_year: string;
+};
+
+type formPayloadType = {
+  email: string;
+  full_name: string;
+  justification: string;
+  skill: string[];
+  course_name: string;
+  study_year: string;
+  role: string;
+};
+
+type radioInputType = {
+  title: string;
+  description: string;
 };
 
 export default function ApplicationForm() {
-  const [radioInputValue, setRadioInputValue] = useState<roleType | null>(null);
+  const [radioInputValue, setRadioInputValue] = useState<radioInputType | null>(
+    null,
+  );
+  const [showYearSelection, setShowYearSelection] = useState<boolean>(false);
+  const [submitMessage, setSubmitMessage] = useState<string>("");
+
+  useEffect(() => {
+    if (submitMessage && submitMessage.includes('successfully')) {
+      const timer = setTimeout(() => setSubmitMessage(""), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [submitMessage]);
 
   const {
     register,
     handleSubmit,
     watch,
+    reset,
+    setValue,
     formState: { errors, isSubmitting },
-  } = useForm<any>();
-  const onSubmit: SubmitHandler<applicationPayloadType> = (
+  } = useForm<applicationPayloadType>();
+
+  const watchedYear = watch("study_year");
+  const onSubmit: SubmitHandler<applicationPayloadType> = async (
     data: applicationPayloadType,
   ) => {
-    if(radioInputValue == null){
-      console.log('null')
-      const roleSection = document.getElementById("role")
+    setSubmitMessage(""); // Clear previous message
+    if (radioInputValue == null) {
+      const roleSection = document.getElementById("role");
       roleSection?.scrollIntoView({ behavior: "smooth" });
       return;
     }
-    const payloads = {
+    const payloads: formPayloadType = {
       ...data,
-      role: radioInputValue,
+      role: radioInputValue.title,
     };
 
-    console.log(payloads);
+    if (!payloads.skill) {
+      payloads.skill = [];
+    }
+
+    try {
+      const res = await fetch("/api/application", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payloads),
+      });
+
+      if (res.ok) {
+        setSubmitMessage("Application submitted successfully!");
+        reset();
+        setRadioInputValue(null);
+      } else {
+        const errorData = await res.json();
+        setSubmitMessage(`Error: ${errorData.error || 'Submission failed'}`);
+      }
+    } catch (error) {
+      setSubmitMessage("Network error. Please try again.");
+    }
   };
 
   return (
-    <div className=" text-(--text-primary)  flex justify-center">
+    <div className="relative text-(--text-primary)  flex justify-center">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-5xl w-full space-y-16"
@@ -80,7 +141,7 @@ export default function ApplicationForm() {
           <h2 className="text-(--accent-primary) font-semibold text-sm tracking-wider uppercase mb-6">
             01. Candidate Details
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 py-2">
             <div className="space-y-2">
               <label className="text-xs font-semibold tracking-wide uppercase text-(--text-primary)">
                 Full Name
@@ -104,16 +165,72 @@ export default function ApplicationForm() {
               />
             </div>
           </div>
-          <div className="space-y-2">
-            <label className="text-xs font-semibold tracking-wide uppercase text-(--text-primary)">
-              Course Name
-            </label>
-            <input
-              type="text"
-              placeholder="BSc Computer Science (may be)"
-              className="w-full bg-(--background-secondary) backdrop-blur-lg border border-(--border-primary) rounded-md p-4 text-(--text-primary) placeholder-(--text-secondary) focus:outline-none focus:border-(--accent-primary) focus:ring-1 focus:ring-(--accent-primary) transition-colors"
-              {...register("course_name", { required: true })}
-            />
+          <div className="flex flex-wrap max-sm:flex-col gap-x-8 gap-y-4 py-2">
+            <div className="space-y-2 flex-1">
+              <label className="text-xs font-semibold tracking-wide uppercase text-(--text-primary)">
+                Course Name
+              </label>
+              <input
+                type="text"
+                placeholder="BSc Computer Science (may be)"
+                className="w-full bg-(--background-secondary) backdrop-blur-lg border border-(--border-primary) rounded-md p-4 text-(--text-primary) placeholder-(--text-secondary) focus:outline-none focus:border-(--accent-primary) focus:ring-1 focus:ring-(--accent-primary) transition-colors"
+                {...register("course_name", { required: true })}
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-xs font-semibold tracking-wide uppercase text-(--text-primary)">
+                Select Year of Study
+              </label>
+              <div
+                onClick={() => {
+                  setShowYearSelection((prev) => !prev);
+                }}
+                className="relative flex items-center"
+              >
+                <input
+                  type="text"
+                  placeholder="Year of Study"
+                  readOnly
+                  className=" w-full bg-(--background-secondary) backdrop-blur-lg border border-(--border-primary) rounded-md p-4 text-(--text-primary) placeholder-(--text-secondary) focus:outline-none focus:border-(--accent-primary) focus:ring-1 focus:ring-(--accent-primary) transition-colors cursor-pointer"
+                  {...register("study_year", { required: true })}
+                />
+                <div className="absolute right-2">
+                  <ChevronDownCircleIcon
+                    className={`${showYearSelection && "text-(--accent-primary) rotate-180"}  transition-all duration-150`}
+                  />
+                </div>
+                <div
+                  className={`absolute p-2 ${!showYearSelection && "h-0 opacity-0 overflow-hidden"} z-20 w-full rounded-lg border border-(--border-primary) bg-(--background-primary) top-[calc(100%+0.5rem)] left-0`}
+                >
+                  <div className="flex flex-col gap-1">
+                    {[
+                      "1st Year",
+                      "2nd Year",
+                      "3rd Year",
+                      "4th Year",
+                      "Postgraduate",
+                    ].map((str) => {
+                      return (
+                        <div
+                          onClick={() => {
+                            if (str == watchedYear) {
+                              setValue("study_year", "");
+                              setShowYearSelection(false);
+                            } else {
+                              setValue("study_year", str);
+                            }
+                          }}
+                          key={str}
+                          className={`cursor-pointer p-2 rounded-lg w-full hover:bg-(--background-tertiary) ${str == watchedYear && "bg-(--background-tertiary)"} border border-(--border-primary)/20`}
+                        >
+                          {str}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -123,7 +240,7 @@ export default function ApplicationForm() {
             02. Select Role
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {roles.map(({ title, description }: roleType) => {
+            {roles.map(({ title, description, Icon }: roleType) => {
               const currentInput = { title, description };
               const checked = currentInput.title == radioInputValue?.title;
               return (
@@ -139,21 +256,9 @@ export default function ApplicationForm() {
                   }}
                 >
                   <div className="flex justify-between items-start mb-6">
-                    <svg
-                      className="w-6 h-6 text-(--accent-primary)"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                      />
-                    </svg>
+                    <Icon className={`group-hover:text-(--accent-primary)`} />
                     <div
-                      className={`appearance-none w-5 h-5 rounded-full border border-(--text-secondary) ${checked && " border-(--accent-primary) border-[6px] "} transition-all bg-(--background-primary) outline-none`}
+                      className={`appearance-none w-5 h-5 rounded-full border  ${checked ? " border-(--accent-primary) border-[6px] " : "border-(--text-secondary)"} transition-all bg-(--background-primary) outline-none`}
                     />
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-(--text-primary) group-hover:text-(--accent-primary) transition-colors">
@@ -171,23 +276,31 @@ export default function ApplicationForm() {
         {/* 03. TECHNICAL ATTRIBUTES */}
         <section>
           <h2 className="text-(--accent-primary) font-semibold text-sm tracking-wider uppercase mb-6">
-            03. Technical Attributes
+            03. Practical Attributes
           </h2>
           <div className="flex flex-wrap gap-4">
             {[
-              "WEB DEVELOPMENT",
+              "TECHNICAL LITERACY",
               "GRAPHIC DESIGN",
               "COMMUNITY MANAGEMENT",
-              "PYTHON",
               "PUBLIC SPEAKING",
-              "REACT / VUE",
-              "CLOUD ARCHITECTURE",
+              "UI/UX DESIGN",
+              "COPYWRITING",
+              "WEB DEVELOPMENT",
+              "PROJECT MANAGEMENT",
+              "SOCIAL MEDIA STRATEGY",
+              "SYSTEM TROUBLESHOOTING",
+              "DATA MANAGEMENT",
+              "VIDEO PRODUCTION",
+              "FINANCIAL PLANNING",
+              "DIGITAL ASSET MANAGEMENT",
             ].map((skill) => (
               <label key={skill} className="cursor-pointer group">
                 <input
                   type="checkbox"
                   className="peer appearance-none"
-                  {...register("skill", { required: false })}
+                  {...register("skill")}
+                  value={skill}
                 />
                 <span className="inline-block px-5 py-2.5 rounded-full bg-(--background-secondary) backdrop-blur-lg border border-(--border-primary) text-(--text-secondary) text-xs font-semibold tracking-wide group-hover:border-(--accent-primary) peer-checked:bg-(--accent-primary) peer-checked:text-(--background-primary) peer-checked:border-(--accent-primary) transition-all">
                   {skill}
@@ -214,11 +327,23 @@ export default function ApplicationForm() {
           </div>
         </section>
 
+        
+
         {/* SUBMIT BUTTON */}
-        <div className="flex justify-end pt-8">
-          <button>
-            <PrimaryButton text="Submit Application" />
+        <div className="flex flex-col gap-2 items-end -mt-8">
+          {(
+            <div className={`h-10 ${!submitMessage && "opacity-0"} rounded-md bg-(--background-tertiary) p-2 border border-(--border-primary)`}>
+              {submitMessage}
+            </div>
+          )}
+          <button
+            type="submit"
+            className="primary-button"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Submitting..." : "Submit Application"}
           </button>
+          
         </div>
       </form>
     </div>
