@@ -35,8 +35,10 @@ export const TextTypingAnimation: React.FC<AnimateTextProps> = ({
       setTimeout(() => {
         setIsDelayFinished(true);
 
-        if (text[displayText.length] == undefined) return;
-        setDisplayText((prev) => prev + text[prev.length]);
+        setDisplayText((prev) => {
+          if (text[prev.length] == undefined) return prev;
+          return prev + text[prev.length];
+        });
       }, speed + renderDelay);
       setRenderDelay(0);
     };
