@@ -1,6 +1,7 @@
 "use client";
 
 import { InfoIcon, X } from "lucide-react";
+import { motion } from "motion/react";
 import { createContext, useContext, useState, ReactNode } from "react";
 
 type MessageType = {
@@ -83,7 +84,13 @@ export const NotifyProvider: React.FC<{ children: ReactNode }> = ({
           expireMessage(index, duration);
 
           return (
-            <div
+            <motion.div
+              initial={{ x: 100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{
+                duration: 0.3,
+                scale: { type: "spring", bounce: 0.4 },
+              }}
               id={`message-${index}`}
               key={value.createdAt.toString()}
               className={`p-2 bg-(--background-secondary) text-sm text-(--text-primary) rounded-md border border-(--border-primary) w-100 max-w-[80vw] flex gap-2`}
@@ -98,7 +105,7 @@ export const NotifyProvider: React.FC<{ children: ReactNode }> = ({
               >
                 <X className="w-5" />
               </button>
-            </div>
+            </motion.div>
           );
         })}
       </div>

@@ -14,8 +14,13 @@ import {
   ArrowRight,
   LucideIcon,
 } from "lucide-react";
-import { aboutRoute, applicationRoute } from "@/constants/routes";
+import {
+  aboutRoute,
+  applicationRoute,
+  whatsappCommunityRoute,
+} from "@/constants/routes";
 import { SCM_THEME } from "@/constants/theme";
+import { motion, translateAxis } from "motion/react";
 
 interface PillarCardProps {
   icon: LucideIcon;
@@ -23,6 +28,7 @@ interface PillarCardProps {
   description: string;
   linkText: string;
   href?: string;
+  index: number;
 }
 
 const editorLines = [
@@ -119,9 +125,24 @@ const PillarCard: React.FC<PillarCardProps> = ({
   title,
   description,
   linkText,
-  href
+  href,
+  index,
 }) => (
-  <div className="relative group backdrop-blur-lg bg-(--background-tertiary) rounded-2xl p-8 border border-(--border-primary) overflow-hidden flex flex-col h-full transition-colors">
+  <motion.div
+    initial={{ opacity: 0, scale: 0.85 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    transition={{
+      duration: 0.4,
+      scale: {
+        type: "spring",
+        visualDuration: 0.4,
+        bounce: 0.4,
+        delay: index / 10,
+      },
+    }}
+    viewport={{ once: true }}
+    className="relative group backdrop-blur-lg bg-(--background-tertiary) rounded-2xl p-8 border border-(--border-primary) overflow-hidden flex flex-col h-full transition-colors"
+  >
     {/* Subtle top glow effect */}
     <div className="absolute top-0 left-0 w-full h-32 bg-linear-to-b from-(--accent-secondary)/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
@@ -129,7 +150,9 @@ const PillarCard: React.FC<PillarCardProps> = ({
       <Icon className="w-5 h-5 text-(--accent-secondary)" />
     </div>
 
-    <h3 className="text-(--text-primary) text-xl font-bold mb-4 tracking-wide">{title}</h3>
+    <h3 className="text-(--text-primary) text-xl font-bold mb-4 tracking-wide">
+      {title}
+    </h3>
     <p className="text-(--text-secondary) text-sm leading-relaxed mb-8 grow">
       {description}
     </p>
@@ -142,7 +165,7 @@ const PillarCard: React.FC<PillarCardProps> = ({
       {linkText}
       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
     </Link>
-  </div>
+  </motion.div>
 );
 
 interface SideFeatureCardProps {
@@ -160,8 +183,12 @@ const SideFeatureCard: React.FC<SideFeatureCardProps> = ({
     <div className="w-10 h-10 mb-6 flex items-center justify-center">
       <Icon className="w-6 h-6 text-(--accent-secondary)" />
     </div>
-    <h3 className="text-(--text-primary) text-lg font-bold mb-3 tracking-wide">{title}</h3>
-    <p className="text-(--text-secondary) text-sm leading-relaxed">{description}</p>
+    <h3 className="text-(--text-primary) text-lg font-bold mb-3 tracking-wide">
+      {title}
+    </h3>
+    <p className="text-(--text-secondary) text-sm leading-relaxed">
+      {description}
+    </p>
   </div>
 );
 
@@ -269,7 +296,11 @@ const page = () => {
             >
               <stop stopColor={SCM_THEME.accentPrimary} stopOpacity="0.1" />
               <stop offset="0.5" stopColor={SCM_THEME.accentPrimary} />
-              <stop offset="1" stopColor={SCM_THEME.accentPrimary} stopOpacity="0.1" />
+              <stop
+                offset="1"
+                stopColor={SCM_THEME.accentPrimary}
+                stopOpacity="0.1"
+              />
             </linearGradient>
           </defs>
         </svg>
@@ -278,14 +309,32 @@ const page = () => {
         {/* Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16">
           <div className="max-w-2xl">
-            <p className="text-(--accent-secondary) text-xs uppercase font-semibold mb-6">
+            <motion.p
+              initial={{ opacity: 0, y: 200 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.4,
+                scale: { type: "spring", bounce: 0.4 },
+              }}
+              viewport={{ once: true }}
+              className="text-(--accent-secondary) text-xs uppercase font-semibold mb-6"
+            >
               Core Architecture
-            </p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-(--text-primary)">
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 300 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.4,
+                position: { type: "spring", bounce: 0.4 },
+              }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-(--text-primary)"
+            >
               Three Pillars of
               <br />
               Growth.
-            </h2>
+            </motion.h2>
           </div>
           <p className="text-(--text-secondary) max-w-sm text-sm leading-relaxed pb-2">
             Our foundation is built on the intersection of discovery, industry
@@ -300,24 +349,26 @@ const page = () => {
             title="Research"
             description="Pushing the boundaries of what's computable. From AI ethics to distributed systems, we foster a culture of academic curiosity and technical rigor."
             linkText="View Projects"
+            index={1}
           />
           <PillarCard
             icon={TrendingUp}
             title="Career Dev"
             description="Bridging the gap between the classroom and the terminal. Workshops, resume critiques, and direct industry pipelines for top-tier internships."
             linkText="Resource Hub"
+            index={2}
           />
           <PillarCard
             icon={Users}
             title="Community"
             description="The human element of hardware. A network of hackers, thinkers, and builders working together to solve problems that matter."
             linkText="Join Our Whatsapp Community"
-            href="https://chat.whatsapp.com/BId8WxG1c0B2DlJ6Oz1Fb5"
+            href={whatsappCommunityRoute}
+            index={3}
           />
         </div>
       </section>
 
-      
       {/* SECTION 2: Infrastructure */}
       <section className="py-20">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-auto lg:h-125">
