@@ -20,7 +20,7 @@ import {
   whatsappCommunityRoute,
 } from "@/constants/routes";
 import { SCM_THEME } from "@/constants/theme";
-import { motion, translateAxis } from "motion/react";
+import { motion } from "motion/react";
 
 interface PillarCardProps {
   icon: LucideIcon;
@@ -140,7 +140,7 @@ const PillarCard: React.FC<PillarCardProps> = ({
         delay: index / 10,
       },
     }}
-    viewport={{ once: true }}
+    viewport={{ amount: 0.5 }}
     className="relative group backdrop-blur-lg bg-(--background-tertiary) rounded-2xl p-8 border border-(--border-primary) overflow-hidden flex flex-col h-full transition-colors"
   >
     {/* Subtle top glow effect */}
@@ -316,7 +316,6 @@ const page = () => {
                 duration: 0.4,
                 scale: { type: "spring", bounce: 0.4 },
               }}
-              viewport={{ once: true }}
               className="text-(--accent-secondary) text-xs uppercase font-semibold mb-6"
             >
               Core Architecture
@@ -328,7 +327,6 @@ const page = () => {
                 duration: 0.4,
                 position: { type: "spring", bounce: 0.4 },
               }}
-              viewport={{ once: true }}
               className="text-3xl md:text-4xl lg:text-5xl font-bold text-(--text-primary)"
             >
               Three Pillars of
