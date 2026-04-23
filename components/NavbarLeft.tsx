@@ -33,7 +33,6 @@ const genMenuItem = (item: menuItemType) => {
 
 const NavbarLeft: React.FC = () => {
   const URLPath = usePathname();
-  const device: string = getDeviceType();
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
 
   return (
@@ -48,7 +47,7 @@ const NavbarLeft: React.FC = () => {
         onClick={() => {
           setToggleMenu((prev) => !prev);
         }}
-        className="p-1"
+        className=""
       >
         <ChevronDownIcon className={`${!toggleMenu?"rotate-90": "-rotate-90"} transition-all duration-150`} />
       </button>

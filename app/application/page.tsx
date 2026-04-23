@@ -1,5 +1,6 @@
 "use client";
-import PrimaryButton from "@/components/PrimaryButton";
+import { contactRoute } from "@/constants/routes";
+import { useNotify } from "@/context/NotifyContext";
 import {
   BriefcaseIcon,
   ChevronDownCircleIcon,
@@ -8,7 +9,8 @@ import {
   MegaphoneIcon,
   PaintbrushIcon,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { redirect } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type roleType = {
@@ -73,14 +75,8 @@ export default function ApplicationForm() {
     null,
   );
   const [showYearSelection, setShowYearSelection] = useState<boolean>(false);
-  const [submitMessage, setSubmitMessage] = useState<string>("");
+  const Notify = useNotify();
 
-  useEffect(() => {
-    if (submitMessage && submitMessage.includes('successfully')) {
-      const timer = setTimeout(() => setSubmitMessage(""), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [submitMessage]);
 
   const {
     register,
@@ -92,10 +88,10 @@ export default function ApplicationForm() {
   } = useForm<applicationPayloadType>();
 
   const watchedYear = watch("study_year");
+
   const onSubmit: SubmitHandler<applicationPayloadType> = async (
     data: applicationPayloadType,
   ) => {
-    setSubmitMessage(""); // Clear previous message
     if (radioInputValue == null) {
       const roleSection = document.getElementById("role");
       roleSection?.scrollIntoView({ behavior: "smooth" });
@@ -106,9 +102,6 @@ export default function ApplicationForm() {
       role: radioInputValue.title,
     };
 
-    if (!payloads.skill) {
-      payloads.skill = [];
-    }
 
     try {
       const res = await fetch("/api/application", {
@@ -118,15 +111,17 @@ export default function ApplicationForm() {
       });
 
       if (res.ok) {
-        setSubmitMessage("Application submitted successfully!");
+        Notify.addToQueue({
+          message: "Application submitted successfully!"
+        })
         reset();
         setRadioInputValue(null);
       } else {
         const errorData = await res.json();
-        setSubmitMessage(`Error: ${errorData.error || 'Submission failed'}`);
+        Notify.addToQueue( { message : `Error: ${errorData.error || 'Submission failed'}`});
       }
     } catch (error) {
-      setSubmitMessage("Network error. Please try again.");
+      Notify.addToQueue({message: "Network error. Please try again."});
     }
   };
 
@@ -318,24 +313,18 @@ export default function ApplicationForm() {
           <div className="space-y-4">
             <label className="text-xs font-semibold tracking-wide uppercase text-(--text-primary) block">
               Why are you a good fit for this role?
+              <span className="text-(--text-secondary)">{" - this field is completely optional, we want students not professional"}</span>
             </label>
             <textarea
               placeholder="Detail your experience, technical background, and vision for the chapter..."
               className="w-full h-40 resize-none bg-(--background-secondary) backdrop-blur-lg border border-(--border-primary) rounded-md p-5 text-(--text-primary) placeholder-(--text-secondary) focus:outline-none focus:border-(--accent-primary) focus:ring-1 focus:ring-(--accent-primary) transition-colors"
-              {...register("justification", { required: true })}
+              {...register("justification")}
             ></textarea>
           </div>
         </section>
 
-        
-
         {/* SUBMIT BUTTON */}
         <div className="flex flex-col gap-2 items-end -mt-8">
-          {(
-            <div className={`h-10 ${!submitMessage && "opacity-0"} rounded-md bg-(--background-tertiary) p-2 border border-(--border-primary)`}>
-              {submitMessage}
-            </div>
-          )}
           <button
             type="submit"
             className="primary-button"
@@ -343,7 +332,6 @@ export default function ApplicationForm() {
           >
             {isSubmitting ? "Submitting..." : "Submit Application"}
           </button>
-          
         </div>
       </form>
     </div>

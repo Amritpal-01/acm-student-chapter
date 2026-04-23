@@ -6,8 +6,8 @@ import { formPayloadType } from '../../../types/interface';
 const ApplicationSchema = new mongoose.Schema({
   email: { type: String, required: true },
   full_name: { type: String, required: true },
-  justification: { type: String, required: true },
-  skill: { type: [String], required: true },
+  justification: { type: String, required: false, default: null },
+  skill: { type: [String], required: false, default: null },
   course_name: { type: String, required: true },
   study_year: { type: String, required: true },
   role: { type: String, required: true },
@@ -30,8 +30,14 @@ export async function POST(request: NextRequest) {
 
     // Basic validation
     const { email, full_name, justification, skill, course_name, study_year, role } = body;
-    if (!email || !full_name || !justification || !skill || !course_name || !study_year || !role) {
+    if (!email || !full_name || !course_name || !study_year || !role) {
       return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
+    }
+
+    body.full_name = body.full_name.trim()
+    body.course_name = body.course_name.trim()
+    if(body.justification){
+      body.justification = body.justification.trim()
     }
 
     // Create and save the application

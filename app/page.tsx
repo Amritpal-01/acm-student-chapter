@@ -22,6 +22,7 @@ interface PillarCardProps {
   title: string;
   description: string;
   linkText: string;
+  href?: string;
 }
 
 const editorLines = [
@@ -118,6 +119,7 @@ const PillarCard: React.FC<PillarCardProps> = ({
   title,
   description,
   linkText,
+  href
 }) => (
   <div className="relative group backdrop-blur-lg bg-(--background-tertiary) rounded-2xl p-8 border border-(--border-primary) overflow-hidden flex flex-col h-full transition-colors">
     {/* Subtle top glow effect */}
@@ -132,13 +134,14 @@ const PillarCard: React.FC<PillarCardProps> = ({
       {description}
     </p>
 
-    <a
-      href="#"
+    <Link
+      target="_blank"
+      href={href || "#"}
       className="inline-flex items-center gap-2 text-(--accent-secondary) text-xs font-semibold tracking-widest uppercase group-hover:text-(--text-primary) transition-colors mt-auto w-fit"
     >
       {linkText}
       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-    </a>
+    </Link>
   </div>
 );
 
@@ -165,7 +168,7 @@ const SideFeatureCard: React.FC<SideFeatureCardProps> = ({
 const page = () => {
   return (
     <div className="flex flex-col items-center">
-      <div className="flex w-full not-lg:flex-col justify-around items-center">
+      <div className="flex w-full not-lg:flex-col justify-around items-center slow-scroll">
         {/* Left Column: Typography and Controls */}
         <div className="flex flex-col">
           {/* Version Label */}
@@ -308,7 +311,8 @@ const page = () => {
             icon={Users}
             title="Community"
             description="The human element of hardware. A network of hackers, thinkers, and builders working together to solve problems that matter."
-            linkText="Join Discord"
+            linkText="Join Our Whatsapp Community"
+            href="https://chat.whatsapp.com/BId8WxG1c0B2DlJ6Oz1Fb5"
           />
         </div>
       </section>
