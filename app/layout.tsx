@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import NavigationStatusBar from "@/components/NavigationStatusBar";
 import NavbarLeft from "@/components/NavbarLeft";
 import { NotifyProvider } from "@/context/NotifyContext";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,14 +35,18 @@ export default function RootLayout({
     >
       <body className="h-dvh w-screen flex flex-col primary-background text-(--text-primary) overflow-hidden">
         {/* <Cursor/> */}
-        <Navbar />
+        <Suspense>
+          <Navbar />
+        </Suspense>
         <NavigationStatusBar />
         <div className="relative flex-1 flex flex-row overflow-hidden">
-          <NavbarLeft />
+          <Suspense>
+            <NavbarLeft />
+          </Suspense>
           <NotifyProvider>
             <div
               id="view"
-              className="relative flex-1 flex flex-col overflow-y-scroll py-10 pr-4 sm:px-10 xl:px-26 overflow-x-hidden"
+              className="relative flex-1 flex flex-col overflow-y-scroll py-10 px-2 sm:px-10 xl:px-26 overflow-x-hidden"
             >
               {children}
             </div>
