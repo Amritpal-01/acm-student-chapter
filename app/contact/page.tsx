@@ -8,10 +8,15 @@ import {
   Globe,
   MessageCircleCodeIcon,
   ChevronDownCircle,
+  PenTool,
+  Code,
+  FileText,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import {
   ACMInstagram,
+  applicationRoute,
   homeRoute,
   whatsappCommunityRoute,
 } from "@/constants/routes";
@@ -66,16 +71,17 @@ export default function App() {
           <div className="flex flex-col"></div>
 
           {/* Left Column: Contact Information */}
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-10">
+            {/* contacts */}
             <div className="">
               <h3 className="text-2xl font-semibold mb-4">
                 Contact Information
               </h3>
               <h3 className="flex items-center gap-2 uppercase my-2 text-sm text-(--text-secondary)">
-                Tap to Follow <ChevronDownCircle size={16}/>
+                Tap to Follow <ChevronDownCircle size={16} />
               </h3>
 
-              <div className=" space-y-6 overflow-hidden">
+              <div className="overflow-hidden">
                 <Link
                   href="mailto:officialucb.acmstudentchapter@gmail.com"
                   className="flex items-start p-2 space-x-4"
@@ -93,67 +99,154 @@ export default function App() {
                   </div>
                 </Link>
 
-                <Link
-                  href={whatsappCommunityRoute}
-                  className="flex items-start space-x-4 p-2 rounded-md"
-                >
-                  <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary) text-(--accent-secondary)">
-                    <Whatsapp />
-                  </div>
-                  <div>
-                    <p className="text-sm text-(--text-secondary) font-medium mb-1">
-                      Join Our Whatsapp Comminity
-                    </p>
-                    <p className="text-md leading-relaxed">Ask any question</p>
-                  </div>
-                </Link>
+                <div className="w-full flex flex-wrap gap-5 *:min-w-80">
+                  <Link
+                    href={whatsappCommunityRoute}
+                    className="flex items-start space-x-4 p-2 rounded-md"
+                  >
+                    <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary) text-(--accent-secondary)">
+                      <Whatsapp />
+                    </div>
+                    <div>
+                      <p className="text-sm text-(--text-secondary) font-medium mb-1">
+                        Join Our Whatsapp Comminity
+                      </p>
+                      <p className="text-md leading-relaxed">
+                        Ask any question
+                      </p>
+                    </div>
+                  </Link>
 
-                <Link
-                  href={ACMInstagram}
-                  className="flex items-start space-x-4 p-2 rounded-md"
-                >
-                  <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary) text-pink-500">
-                    <InstagramIcon />
-                  </div>
-                  <div>
-                    <p className="text-sm text-(--text-secondary) font-medium mb-1">
-                      Follow us on Instagram
-                    </p>
-                    <p className="text-md leading-relaxed">Get quick updates</p>
-                  </div>
-                </Link>
-              </div>
-
-              {/* Social Links */}
-              <div className="mt-10 pt-8 border-t border-(--border-primary)">
-                <p className="text-sm text-(--text-secondary) font-medium mb-4">
-                  Follow our socials
-                </p>
-                <div className="flex space-x-4">
-                  {[
-                    { icon: Globe, label: "Website", href: homeRoute },
-                    {
-                      icon: Whatsapp,
-                      label: "Whatsapp",
-                      href: whatsappCommunityRoute,
-                    },
-                    {
-                      icon: InstagramIcon,
-                      label: "Instagram",
-                      href: ACMInstagram,
-                    },
-                  ].map((social, idx) => (
-                    <Link
-                      key={idx}
-                      href={social.href || "#"}
-                      className="p-3 bg-(--background-primary) border border-(--border-primary) rounded-lg text-(--text-secondary) hover:text-(--accent-primary) hover:border-(--accent-primary) hover:shadow-[0_0_15px_var(--shadow-primary) transition-all duration-300"
-                      aria-label={social.label}
-                      target="_blank"
-                    >
-                      <social.icon />
-                    </Link>
-                  ))}
+                  <Link
+                    href={ACMInstagram}
+                    className="flex items-start space-x-4 p-2 rounded-md"
+                  >
+                    <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary) text-pink-500">
+                      <InstagramIcon />
+                    </div>
+                    <div>
+                      <p className="text-sm text-(--text-secondary) font-medium mb-1">
+                        Follow us on Instagram
+                      </p>
+                      <p className="text-md leading-relaxed">
+                        Get quick updates
+                      </p>
+                    </div>
+                  </Link>
                 </div>
+              </div>
+            </div>
+
+            {/* application */}
+            <div>
+              <h3 className="text-2xl font-semibold mb-4">Open Applications</h3>
+              <h3 className="flex items-center gap-2 uppercase mb-4 text-sm text-(--text-secondary)">
+                Tap to Join us <ChevronDownCircle size={16} />
+              </h3>
+              <h3 className="font-light tracking-wider flex items-center gap-2 mb-4 text-sm text-(--text-primary)">
+                Apply on our website
+              </h3>
+              <Link
+                href={applicationRoute + "?onlyView=1"}
+                className="flex items-start space-x-4 p-2 mb-4 rounded-md"
+              >
+                <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary) text-(--accent-tertiary)">
+                  <Globe />
+                </div>
+                <div>
+                  <p className="text-sm text-(--text-secondary) font-medium mb-1">
+                    Web Application Form
+                  </p>
+                  <p className="text-md leading-relaxed">
+                    Apply for any role available
+                  </p>
+                </div>
+              </Link>
+              <h3 className="font-light tracking-wider flex items-center gap-2 mb-4 text-sm text-(--text-primary)">
+                Google Forms
+              </h3>
+              <div className="w-full flex flex-wrap gap-2">
+                {[
+                  {
+                    description: "Leadership Application",
+                    title: "Design Team Lead",
+                    shortLink: "https://forms.gle/TXG3goWi7J3w9G1C9",
+                    link: "https://docs.google.com/forms/d/e/1FAIpQLSeWniVNu_y0W5WLRdIOA2L1CsbK8KZdMohMIlUK56a6BXydgQ/viewform?usp=dialog",
+                    icon: PenTool, // design → creativity
+                  },
+                  {
+                    description: "Leadership Application",
+                    title: "Technical Team Lead",
+                    shortLink: "https://forms.gle/8UWyQ7nkNwDetvgv5",
+                    link: "https://docs.google.com/forms/d/e/1FAIpQLScD9UOTIMhoNS5yWR2pyS1FZ1i8K77zBDD_4seTENIiyfLYmA/viewform?usp=publish-editor",
+                    icon: Code, // technical → coding
+                  },
+                  {
+                    description: "Leadership Application",
+                    title: "Content Team Lead",
+                    shortLink: "https://forms.gle/Fxe3yfkErnMK8j9m7",
+                    link: "https://docs.google.com/forms/d/e/1FAIpQLScsmqV7cobsujEAzfg_z_ZNy9UiOpema9BbKHldhW7G2GCSJw/viewform?usp=publish-editor",
+                    icon: FileText, // content → writing
+                  },
+                  {
+                    description: "Leadership Application",
+                    title: "Management Team Lead",
+                    shortLink: "https://forms.gle/cNFe4d7CQE5PycGMA",
+                    link: "https://docs.google.com/forms/d/e/1FAIpQLSfyDK4pRml8PEXFfNYjTJ4hTr2iS9AhRyow4FmAPP30hFTp3Q/viewform?usp=publish-editor",
+                    icon: Users, // management → people/team
+                  },
+                ].map((obj) => {
+                  return (
+                    <Link
+                      key={obj.title}
+                      href={obj.link}
+                      target="_blank"
+                      className="flex items-start min-w-80 space-x-4 p-2 rounded-md"
+                    >
+                      <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary) text-(--text-secondary)">
+                        <obj.icon />
+                      </div>
+                      <div>
+                        <p className="text-sm text-(--text-secondary) font-medium mb-1">
+                          {obj.description}
+                        </p>
+                        <p className="text-md leading-relaxed">{obj.title}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="mt-10 pt-8 border-t border-(--border-primary)">
+              <p className="text-sm text-(--text-secondary) font-medium mb-4">
+                Follow our socials
+              </p>
+              <div className="flex space-x-4">
+                {[
+                  { icon: Globe, label: "Website", href: homeRoute },
+                  {
+                    icon: Whatsapp,
+                    label: "Whatsapp",
+                    href: whatsappCommunityRoute,
+                  },
+                  {
+                    icon: InstagramIcon,
+                    label: "Instagram",
+                    href: ACMInstagram,
+                  },
+                ].map((social, idx) => (
+                  <Link
+                    key={idx}
+                    href={social.href || "#"}
+                    className="p-3 bg-(--background-primary) border border-(--border-primary) rounded-lg text-(--text-secondary) hover:text-(--accent-primary) hover:border-(--accent-primary) hover:shadow-[0_0_15px_var(--shadow-primary) transition-all duration-300"
+                    aria-label={social.label}
+                    target="_blank"
+                  >
+                    <social.icon />
+                  </Link>
+                ))}
               </div>
             </div>
           </div>

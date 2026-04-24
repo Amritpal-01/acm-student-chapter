@@ -37,8 +37,8 @@ export default function RootLayout({
         {/* <Cursor/> */}
         <Suspense>
           <Navbar />
-        </Suspense>
         <NavigationStatusBar />
+        </Suspense>
         <div className="relative flex-1 flex flex-row overflow-hidden">
           <Suspense>
             <NavbarLeft />

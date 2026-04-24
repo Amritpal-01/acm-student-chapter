@@ -189,7 +189,7 @@
 }
 
 .primary-button {
-  background: var(--background-primary);
+  background: var(--accent-primary);
   color: var(--text-primary);
   
   font-weight: 600;

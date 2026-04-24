@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import saperateURLPath from "@/functions/saperateURLPath";
 import Link from "next/link";
 import { checkpointMap } from "@/types/type";
@@ -9,6 +9,11 @@ import menuItems from "@/constants/menuItems";
 
 const NavigationStatusBar: React.FC = () => {
   const URLPath = usePathname();
+    const searchParams = useSearchParams();
+  
+    const onlyView = searchParams.get("onlyView");
+  
+    if (onlyView === "1") return null;
 
   return (
     <div
