@@ -147,7 +147,7 @@ export default function App() {
                 Apply on our website
               </h3>
               <Link
-                href={applicationRoute + "?onlyView=1"}
+                href={applicationRoute}
                 className="flex items-start space-x-4 p-2 mb-4 rounded-md"
               >
                 <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary) text-(--accent-tertiary)">
