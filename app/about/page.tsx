@@ -285,18 +285,13 @@ useEffect(() => {
         <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
           <Link
             href={applicationRoute}
-            className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-all duration-200 active:scale-95 hover:opacity-90"
-            style={{
-              background: "var(--button-background-primary)",
-              color: "var(--button-text-primary)",
-              boxShadow: "0 4px 20px var(--shadow-accent-primary)",
-            }}
+            className="primary-button"
           >
             Join the Chapter <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
             href={aboutRoute}
-            className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold border border-(--border-primary) text-(--text-secondary) hover:text-(--text-primary) hover:border-white/20 transition-all duration-200"
+            className="secondary-button"
           >
             <Calendar className="w-4 h-4" /> About us
           </Link>

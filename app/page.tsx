@@ -140,7 +140,7 @@ const PillarCard: React.FC<PillarCardProps> = ({
         delay: index / 10,
       },
     }}
-    viewport={{ amount: 0.5 }}
+    viewport={{ amount: 0.25 }}
     className="relative group backdrop-blur-lg bg-(--background-tertiary) rounded-2xl p-8 border border-(--border-primary) overflow-hidden flex flex-col h-full transition-colors"
   >
     {/* Subtle top glow effect */}
@@ -179,7 +179,20 @@ const SideFeatureCard: React.FC<SideFeatureCardProps> = ({
   title,
   description,
 }) => (
-  <div className="bg-(--background-secondary) rounded-2xl p-8 border border-(--border-primary) flex flex-col justify-center transition-colors hover:bg-(--background-tertiary)">
+  <motion.div
+    initial={{ opacity: 0, scale: 0.85 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    transition={{
+      duration: 0.4,
+      scale: {
+        type: "spring",
+        visualDuration: 0.4,
+        bounce: 0.4,
+      },
+    }}
+    viewport={{ amount: 0.25 }}
+    className="bg-(--background-secondary) rounded-2xl p-8 border border-(--border-primary) flex flex-col justify-center transition-colors hover:bg-(--background-tertiary)"
+  >
     <div className="w-10 h-10 mb-6 flex items-center justify-center">
       <Icon className="w-6 h-6 text-(--accent-secondary)" />
     </div>
@@ -189,7 +202,7 @@ const SideFeatureCard: React.FC<SideFeatureCardProps> = ({
     <p className="text-(--text-secondary) text-sm leading-relaxed">
       {description}
     </p>
-  </div>
+  </motion.div>
 );
 
 const page = () => {
@@ -221,7 +234,7 @@ const page = () => {
           </div>
 
           {/* Body Text */}
-          <p className="text-(--text-secondary) text-md max-w-lg leading-relaxed mb-8">
+          <p className="text-(--text-secondary) text-sm max-w-lg leading-relaxed mb-8">
             An ACM Student Chapter is a local, university-based branch of the
             Association for Computing Machinery (ACM). We offer networking,
             technical workshops, hackathons, and mentorship, bridging the gap
@@ -229,7 +242,7 @@ const page = () => {
           </p>
 
           {/* Current Focus Section */}
-          <div className="mb-12">
+          {/* <div className="mb-12">
             <h3 className="text-(--text-secondary) text-xs font-bold tracking-[0.15em] mb-3 uppercase">
               Current_Focus
             </h3>
@@ -241,15 +254,15 @@ const page = () => {
                 Tech Events
               </span>
             </div>
-          </div>
+          </div> */}
 
           {/* Call to Action Buttons */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-8 mt-4 sm:mt-2">
-            <Link href={applicationRoute}>
-              <PrimaryButton text="Become a member" />
+            <Link className="primary-button" href={applicationRoute}>
+              Become a member
             </Link>
-            <Link href={aboutRoute}>
-              <TertiaryButton text="About Us  →" />
+            <Link className="secondary-button" href={aboutRoute}>
+              About Us →
             </Link>
           </div>
         </div>
@@ -388,16 +401,36 @@ const page = () => {
             {/* Content */}
             <div className="relative z-10 max-w-xl">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-8 h-px bg-(--accent-secondary)"></div>
+                <motion.div
+                  initial={{ width: 0 }}
+                  whileInView={{ width: 50 }}
+                  transition={{
+                    delay: 0.2,
+                    duration: 0.4,
+                    width: {
+                      bounce: 0,
+                      type: "keyframes",
+                    },
+                  }}
+                  className="h-px bg-(--accent-secondary)"
+                ></motion.div>
                 <p className="text-(--accent-secondary) text-xs tracking-[0.2em] uppercase font-semibold">
                   Inside the Hub
                 </p>
               </div>
 
-              <h2 className="text-4xl md:text-5xl font-bold text-(--text-primary) tracking-tighter leading-tight mb-6">
+              <motion.h2
+                initial={{ scale: 0.9 }}
+                whileInView={{ scale: 1 }}
+                transition={{
+                  delay: 0.2,
+                  duration: 0.4,
+                }}
+                className="text-4xl md:text-5xl font-bold text-(--text-primary) tracking-tighter leading-tight mb-6"
+              >
                 Access World-Class Tech
                 <br className="hidden md:block" /> Infrastructure.
-              </h2>
+              </motion.h2>
 
               <p className="text-(--text-secondary) text-sm md:text-base leading-relaxed mb-10 max-w-lg">
                 From server access for deep learning models to collaborative

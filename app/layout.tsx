@@ -6,6 +6,7 @@ import NavigationStatusBar from "@/components/NavigationStatusBar";
 import NavbarLeft from "@/components/NavbarLeft";
 import { NotifyProvider } from "@/context/NotifyContext";
 import { Suspense } from "react";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,6 +50,7 @@ export default function RootLayout({
               className="relative flex-1 flex flex-col overflow-y-scroll py-10 px-2 sm:px-10 xl:px-26 overflow-x-hidden"
             >
               {children}
+              <Footer/>
             </div>
           </NotifyProvider>
         </div>

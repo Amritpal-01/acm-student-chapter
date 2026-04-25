@@ -334,7 +334,7 @@ export default function ApplicationForm() {
         <div className="flex flex-col gap-2 items-end -mt-8">
           <button
             type="submit"
-            className="primary-button"
+            className="primary-button max-sm:w-full"
             disabled={isSubmitting}
           >
             {isSubmitting ? "Submitting..." : "Submit Application"}

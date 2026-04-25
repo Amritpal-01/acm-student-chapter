@@ -33,7 +33,6 @@
   --shadow-primary: rgba(0, 0, 0, 0.4); /* Deep drop shadow for depth */
 }
 
-
 #purple-theme {
   --background-primary: #0a0519; /* Deep Slate */
   --background-secondary: #0e062594;
@@ -190,26 +189,27 @@
 }
 
 .primary-button {
-  background: var(--accent-primary);
-  color: var(--text-primary);
-  
-  font-weight: 600;
-  font-size: 0.875rem; /* text-sm */
-  padding: 0.5rem 1.25rem; /* py-2 px-5 */
-  border-radius: 0.125rem; /* rounded-sm */
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  @apply inline-flex justify-center items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-all duration-200 active:scale-95 hover:opacity-90;
+
+  background: var(--button-background-primary);
+  color: var(--button-text-primary);
+  box-shadow: 0 4px 20px var(--shadow-accent-primary);
 }
 
+.secondary-button {
+  @apply inline-flex justify-center items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold border border-(--border-primary) text-(--text-secondary) hover:text-(--text-primary) hover:border-white/20 transition-all duration-200;
+}
 /* scale-on-hover */
-.primary-button:hover {
+button:hover {
   transform: scale(1.05);
 }
 
 /* render-animation (assuming simple fade/appear) */
-.primary-button {
+button {
   animation: fadeIn 0.3s ease-in-out;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 @keyframes fadeIn {
@@ -300,13 +300,11 @@
     transform: translateY(0px);
     opacity: 1;
   }
-  80%{
+  80% {
     opacity: 1;
   }
   100% {
     transform: translateY(200px);
     opacity: 0;
   }
-  
 }
-
