@@ -12,6 +12,7 @@ import {
   Code,
   FileText,
   Users,
+  VideoIcon,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -195,11 +196,18 @@ export default function App() {
                     link: "https://docs.google.com/forms/d/e/1FAIpQLSfyDK4pRml8PEXFfNYjTJ4hTr2iS9AhRyow4FmAPP30hFTp3Q/viewform?usp=publish-editor",
                     icon: Users, // management → people/team
                   },
+                  {
+                    description: "Leadership Application",
+                    title: "Media Team Lead",
+                    shortLink: "https://forms.gle/GZVYvBCP9QTuAqFw7",
+                    link: "https://docs.google.com/forms/d/e/1FAIpQLSfwkrXZgTSgHFf5slnGvyCIpqdu8MCFh17say0s2qa14fgFAw/viewform?usp=dialog",
+                    icon: VideoIcon, // management → people/team
+                  },
                 ].map((obj) => {
                   return (
                     <Link
                       key={obj.title}
-                      href={obj.link}
+                      href={obj.shortLink}
                       target="_blank"
                       className="flex items-start min-w-80 space-x-4 p-2 rounded-md"
                     >
