@@ -8,6 +8,7 @@ import {
   LucideIcon,
   MegaphoneIcon,
   PaintbrushIcon,
+  VideoIcon,
 } from "lucide-react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
@@ -43,6 +44,12 @@ const roles: roleType[] = [
     description:
       "Spearhead technical workshops and coding challenges to bridge the gap between classroom theory and real-world software engineering.",
     Icon: CpuIcon,
+  },
+  {
+    title: "Media Team Lead",
+    description:
+      "Drive visual storytelling and user experience by crafting intuitive designs and compelling graphics that elevate the chapter’s brand and engagement across platforms.",
+    Icon: VideoIcon,
   },
 ];
 
