@@ -207,7 +207,17 @@ const SideFeatureCard: React.FC<SideFeatureCardProps> = ({
 
 const page = () => {
   return (
-    <div className="flex flex-col items-center">
+    <motion.div 
+    initial={{ opacity: 0, scale: 0.85 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{
+      duration: 0.4,
+      scale: {
+        type: "spring",
+        visualDuration: 0.4,
+        bounce: 0.4,
+      },
+    }} className="flex flex-col items-center">
       <div className="flex w-full not-lg:flex-col justify-around items-center slow-scroll">
         {/* Left Column: Typography and Controls */}
         <div className="flex flex-col">
@@ -459,7 +469,7 @@ const page = () => {
           </div>
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 };
 

@@ -38,7 +38,7 @@ export default function RootLayout({
         {/* <Cursor/> */}
         <Suspense>
           <Navbar />
-        <NavigationStatusBar />
+          <NavigationStatusBar />
         </Suspense>
         <div className="relative flex-1 flex flex-row overflow-hidden">
           <Suspense>
@@ -50,7 +50,7 @@ export default function RootLayout({
               className="relative flex-1 flex flex-col overflow-y-scroll py-10 px-2 sm:px-10 xl:px-26 overflow-x-hidden"
             >
               {children}
-              <Footer/>
+              <Footer />
             </div>
           </NotifyProvider>
         </div>

@@ -23,7 +23,7 @@ import {
 } from "@/constants/routes";
 import Whatsapp from "@/icons/Whatsapp";
 import InstagramIcon from "@/icons/InstagramIcon";
-import { label } from "motion/react-client";
+import { motion } from "motion/react";
 
 export default function App() {
   const [formData, setFormData] = useState({
@@ -45,7 +45,17 @@ export default function App() {
   };
 
   return (
-    <div className="flex-1 ">
+    <motion.div 
+    initial={{ opacity: 0, scale: 0.85 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{
+      duration: 0.4,
+      scale: {
+        type: "spring",
+        visualDuration: 0.4,
+        bounce: 0.4,
+      },
+    }} className="flex-1 ">
       <main className="max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
         <div className="text-center mb-16 space-y-4">
@@ -230,6 +240,6 @@ export default function App() {
           </div>
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 }

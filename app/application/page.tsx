@@ -1,5 +1,5 @@
 "use client";
-import { contactRoute } from "@/constants/routes";
+import { motion } from "motion/react";
 import { useNotify } from "@/context/NotifyContext";
 import {
   BriefcaseIcon,
@@ -10,7 +10,6 @@ import {
   PaintbrushIcon,
   VideoIcon,
 } from "lucide-react";
-import { redirect } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -84,7 +83,6 @@ export default function ApplicationForm() {
   const [showYearSelection, setShowYearSelection] = useState<boolean>(false);
   const Notify = useNotify();
 
-
   const {
     register,
     handleSubmit,
@@ -109,7 +107,6 @@ export default function ApplicationForm() {
       role: radioInputValue.title,
     };
 
-
     try {
       const res = await fetch("/api/application", {
         method: "POST",
@@ -119,21 +116,31 @@ export default function ApplicationForm() {
 
       if (res.ok) {
         Notify.addToQueue({
-          message: "Application submitted successfully!"
-        })
+          message: "Application submitted successfully!",
+        });
         reset();
         setRadioInputValue(null);
       } else {
         const errorData = await res.json();
-        Notify.addToQueue( { message : `Error: ${errorData.error || 'Submission failed'}`});
+        Notify.addToQueue({
+          message: `Error: ${errorData.error || "Submission failed"}`,
+        });
       }
     } catch (error) {
-      Notify.addToQueue({message: "Network error. Please try again."});
+      Notify.addToQueue({ message: "Network error. Please try again." });
     }
   };
 
   return (
-    <div className="relative text-(--text-primary)  flex justify-center">
+    <motion.div
+      initial={{ opacity: 0, x: 500 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{
+        duration: 0.3,
+        ease: "easeOut",
+      }}
+      className="relative text-(--text-primary)  flex justify-center"
+    >
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-5xl w-full space-y-16"
@@ -320,7 +327,11 @@ export default function ApplicationForm() {
           <div className="space-y-4">
             <label className="text-xs font-semibold tracking-wide uppercase text-(--text-primary) block">
               Why are you a good fit for this role?
-              <span className="text-(--text-secondary)">{" - this field is completely optional, we want students not professional"}</span>
+              <span className="text-(--text-secondary)">
+                {
+                  " - this field is completely optional, we want students not professional"
+                }
+              </span>
             </label>
             <textarea
               placeholder="Detail your experience, technical background, and vision for the chapter..."
@@ -341,6 +352,6 @@ export default function ApplicationForm() {
           </button>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 }

@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { aboutRoute, applicationRoute } from "@/constants/routes";
+import {motion} from 'motion/react'
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -201,7 +202,17 @@ useEffect(() => {
 
 
   return (
-    <main className="flex-1 pr-2">
+    <motion.main 
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{
+      duration: 0.4,
+      scale: {
+        type: "spring",
+        visualDuration: 0.3,
+        bounce: 0.4,
+      },
+    }} className="flex-1 pr-2">
       {/* ── Grid / noise texture overlay ── */}
       <div
         className="pointer-events-none fixed inset-0 opacity-[0.03]"
@@ -210,31 +221,6 @@ useEffect(() => {
             "repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,.15) 40px,rgba(255,255,255,.15) 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(255,255,255,.15) 40px,rgba(255,255,255,.15) 41px)",
         }}
       />
-
-      {/* ── Radial glow blobs ── */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div
-          className="absolute -top-40 -left-40 w-150 h-150 rounded-full opacity-10"
-          style={{
-            background:
-              "radial-gradient(circle, var(--accent-primary) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute top-1/2 -right-60 w-125 h-125 rounded-full opacity-8"
-          style={{
-            background:
-              "radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute -bottom-20 left-1/3 w-100 h-100 rounded-full opacity-6"
-          style={{
-            background:
-              "radial-gradient(circle, var(--accent-tertiary) 0%, transparent 70%)",
-          }}
-        />
-      </div>
 
       {/* ══════════════ HERO ══════════════ */}
       <section
@@ -584,6 +570,6 @@ useEffect(() => {
           </div>
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 }
