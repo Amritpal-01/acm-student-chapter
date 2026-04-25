@@ -394,7 +394,7 @@ const page = () => {
                 </p>
               </div>
 
-              <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter leading-tight mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-(--text-primary) tracking-tighter leading-tight mb-6">
                 Access World-Class Tech
                 <br className="hidden md:block" /> Infrastructure.
               </h2>

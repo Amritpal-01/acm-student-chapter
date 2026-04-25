@@ -104,7 +104,7 @@ export default function App() {
                     href={whatsappCommunityRoute}
                     className="flex items-start space-x-4 p-2 rounded-md"
                   >
-                    <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary) text-(--accent-secondary)">
+                    <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary) text-green-500">
                       <Whatsapp />
                     </div>
                     <div>
