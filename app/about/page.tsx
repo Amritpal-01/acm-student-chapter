@@ -21,7 +21,7 @@ import {
   Star,
 } from "lucide-react";
 import Link from "next/link";
-import { aboutRoute, applicationRoute } from "@/constants/routes";
+import { aboutRoute, applicationRoute, contactRoute } from "@/constants/routes";
 import {motion} from 'motion/react'
 
 function useInView(threshold = 0.15) {
@@ -276,10 +276,10 @@ useEffect(() => {
             Join the Chapter <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            href={aboutRoute}
+            href={contactRoute}
             className="secondary-button"
           >
-            <Calendar className="w-4 h-4" /> About us
+            <Calendar className="w-4 h-4" /> Contact us
           </Link>
         </div>
         {/* scroll cue */}
