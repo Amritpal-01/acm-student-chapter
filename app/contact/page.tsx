@@ -16,14 +16,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import {
-  ACMInstagram,
   applicationRoute,
-  homeRoute,
-  whatsappCommunityRoute,
+  socials,
 } from "@/constants/routes";
 import Whatsapp from "@/icons/Whatsapp";
 import InstagramIcon from "@/icons/InstagramIcon";
 import { motion } from "motion/react";
+import LinkedInIcon from "@/icons/LinkedInIcon";
 
 export default function App() {
   const [formData, setFormData] = useState({
@@ -45,17 +44,7 @@ export default function App() {
   };
 
   return (
-    <motion.div 
-    initial={{ opacity: 0, scale: 0.85 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{
-      duration: 0.4,
-      scale: {
-        type: "spring",
-        visualDuration: 0.4,
-        bounce: 0.4,
-      },
-    }} className="flex-1 ">
+    <div  className="flex-1 ">
       <main className="max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
         <div className="text-center mb-16 space-y-4">
@@ -94,7 +83,7 @@ export default function App() {
 
               <div className="overflow-hidden">
                 <Link
-                  href="mailto:officialucb.acmstudentchapter@gmail.com"
+                  href={`mailto:${socials.officialEmail}`}
                   className="flex items-start p-2 space-x-4"
                 >
                   <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary) text-(--accent-primary)">
@@ -105,14 +94,14 @@ export default function App() {
                       Email Us
                     </p>
                     <h3 className="truncate max-w-full hover:text-(--accent-primary) transition-colors">
-                      officialucb.acmstudentchapter@gmail.com
+                      {socials.officialEmail}
                     </h3>
                   </div>
                 </Link>
 
                 <div className="w-full flex flex-wrap gap-5 *:min-w-80">
                   <Link
-                    href={whatsappCommunityRoute}
+                    href={socials.whatsappCommunityLink}
                     className="flex items-start space-x-4 p-2 rounded-md"
                   >
                     <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary) text-green-500">
@@ -129,7 +118,7 @@ export default function App() {
                   </Link>
 
                   <Link
-                    href={ACMInstagram}
+                    href={socials.instagramProfile}
                     className="flex items-start space-x-4 p-2 rounded-md"
                   >
                     <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary) text-pink-500">
@@ -138,6 +127,23 @@ export default function App() {
                     <div>
                       <p className="text-sm text-(--text-secondary) font-medium mb-1">
                         Follow us on Instagram
+                      </p>
+                      <p className="text-md leading-relaxed">
+                        Get quick updates
+                      </p>
+                    </div>
+                  </Link>
+
+                  <Link
+                    href={socials.linkedinProfile}
+                    className="flex items-start space-x-4 p-2 rounded-md"
+                  >
+                    <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary)">
+                      <LinkedInIcon color={'#58f'}/>
+                    </div>
+                    <div>
+                      <p className="text-sm text-(--text-secondary) font-medium mb-1">
+                        Follow us on LinkenIn
                       </p>
                       <p className="text-md leading-relaxed">
                         Get quick updates
@@ -235,11 +241,9 @@ export default function App() {
                 })}
               </div>
             </div>
-
-            
           </div>
         </div>
       </main>
-    </motion.div>
+    </div>
   );
 }

@@ -202,17 +202,7 @@ useEffect(() => {
 
 
   return (
-    <motion.main 
-    initial={{ opacity: 0, scale: 0.9 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{
-      duration: 0.4,
-      scale: {
-        type: "spring",
-        visualDuration: 0.3,
-        bounce: 0.4,
-      },
-    }} className="flex-1 pr-2">
+    <main className="flex-1 pr-2">
       {/* ── Grid / noise texture overlay ── */}
       <div
         className="pointer-events-none fixed inset-0 opacity-[0.03]"
@@ -570,6 +560,6 @@ useEffect(() => {
           </div>
         </div>
       </section>
-    </motion.main>
+    </main>
   );
 }

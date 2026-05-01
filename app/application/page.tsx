@@ -132,13 +132,7 @@ export default function ApplicationForm() {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 500 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{
-        duration: 0.3,
-        ease: "easeOut",
-      }}
+    <div
       className="relative text-(--text-primary)  flex justify-center"
     >
       <form
@@ -352,6 +346,6 @@ export default function ApplicationForm() {
           </button>
         </div>
       </form>
-    </motion.div>
+    </div>
   );
 }

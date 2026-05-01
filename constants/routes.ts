@@ -4,5 +4,11 @@ export const applicationRoute = '/application'
 export const contactRoute = '/contact'
 export const eventsRoute = '/events'
 export const homeRoute = '/'
-export const whatsappCommunityRoute= 'https://chat.whatsapp.com/BId8WxG1c0B2DlJ6Oz1Fb5'
-export const ACMInstagram = 'https://www.instagram.com/ucb.acm_studentchapter?utm_source=qr&igsh=d254cThveHN0aDlo';
+
+export const socials = {
+  whatsappCommunityLink: "https://chat.whatsapp.com/BId8WxG1c0B2DlJ6Oz1Fb5",
+  instagramProfile: "https://www.instagram.com/ucb.acm_studentchapter?utm_source=qr&igsh=d254cThveHN0aDlo",
+  linkedinProfile: "https://www.linkedin.com/in/association-of-computing-machinery-university-college-birmingham-337368407",
+  officialWebsite: "https://acm-student-chapter-ucb.vercel.app/",
+  officialEmail: "associationofcomputingmachinery@ucbguild.co.uk"
+}

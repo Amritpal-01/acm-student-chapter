@@ -1,7 +1,5 @@
 "use client";
 import CodeEditor from "@/components/CodeEditor";
-import PrimaryButton from "@/components/PrimaryButton";
-import TertiaryButton from "@/components/TertiaryButton";
 import AnimateWords from "@/functions/AnimateWords";
 import MouseInteractions from "@/functions/MouseInteractions";
 import Link from "next/link";
@@ -17,7 +15,7 @@ import {
 import {
   aboutRoute,
   applicationRoute,
-  whatsappCommunityRoute,
+  socials,
 } from "@/constants/routes";
 import { SCM_THEME } from "@/constants/theme";
 import { motion } from "motion/react";
@@ -384,7 +382,7 @@ const page = () => {
             title="Community"
             description="The human element of hardware. A network of hackers, thinkers, and builders working together to solve problems that matter."
             linkText="Join Our Whatsapp Community"
-            href={whatsappCommunityRoute}
+            href={socials.whatsappCommunityLink}
             index={3}
           />
         </div>

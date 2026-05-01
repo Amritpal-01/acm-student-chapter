@@ -1,5 +1,7 @@
-import { ACMInstagram, homeRoute, whatsappCommunityRoute } from '@/constants/routes'
+import { socials } from '@/constants/routes'
+import { SCM_THEME } from '@/constants/theme'
 import InstagramIcon from '@/icons/InstagramIcon'
+import LinkedInIcon from '@/icons/LinkedInIcon'
 import Whatsapp from '@/icons/Whatsapp'
 import { Globe } from 'lucide-react'
 import Link from 'next/link'
@@ -15,17 +17,21 @@ const Footer = () => {
               </p>
               <div className="flex space-x-4">
                 {[
-                  { icon: Globe, label: "Website", href: homeRoute },
+                  { icon: Globe, label: "Website", href: socials.officialWebsite },
                   {
                     icon: Whatsapp,
                     label: "Whatsapp",
-                    href: whatsappCommunityRoute,
+                    href: socials.whatsappCommunityLink,
                   },
                   {
                     icon: InstagramIcon,
                     label: "Instagram",
-                    href: ACMInstagram,
-                  },
+                    href: socials.instagramProfile,
+                  },{
+                    icon: LinkedInIcon,
+                    label: "LinkedIn",
+                    href: socials.linkedinProfile
+                  }
                 ].map((social, idx) => (
                   <Link
                     key={idx}
@@ -34,7 +40,7 @@ const Footer = () => {
                     aria-label={social.label}
                     target="_blank"
                   >
-                    <social.icon />
+                    <social.icon color={SCM_THEME.textSecondary} side={24}/>
                   </Link>
                 ))}
               </div>
