@@ -139,7 +139,7 @@ export default function App() {
                     className="flex items-start space-x-4 p-2 rounded-md"
                   >
                     <div className="p-3 bg-(--background-primary) rounded-lg border border-(--border-primary)">
-                      <LinkedInIcon color={'#58f'}/>
+                      <LinkedInIcon color={'#58f'} side={26}/>
                     </div>
                     <div>
                       <p className="text-sm text-(--text-secondary) font-medium mb-1">
