@@ -12,11 +12,7 @@ import {
   ArrowRight,
   LucideIcon,
 } from "lucide-react";
-import {
-  aboutRoute,
-  applicationRoute,
-  socials,
-} from "@/constants/routes";
+import { aboutRoute, applicationRoute, socials } from "@/constants/routes";
 import { SCM_THEME } from "@/constants/theme";
 import { motion } from "motion/react";
 
@@ -96,10 +92,7 @@ const editorLines = [
       <>
         Status =
         <span className="text-(--text-secondary)">
-          <AnimateWords.StringProp
-            text={`"Promoting knowledge and communication between computing enthusiasts."`}
-            speed={50}
-          />
+          Promoting knowledge and communication between computing enthusiasts.
         </span>
       </>
     ),
@@ -205,17 +198,19 @@ const SideFeatureCard: React.FC<SideFeatureCardProps> = ({
 
 const page = () => {
   return (
-    <motion.div 
-    initial={{ opacity: 0, scale: 0.85 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{
-      duration: 0.4,
-      scale: {
-        type: "spring",
-        visualDuration: 0.4,
-        bounce: 0.4,
-      },
-    }} className="flex flex-col items-center">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.85 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 0.4,
+        scale: {
+          type: "spring",
+          visualDuration: 0.4,
+          bounce: 0.4,
+        },
+      }}
+      className="flex flex-col items-center"
+    >
       <div className="flex w-full not-lg:flex-col justify-around items-center slow-scroll">
         {/* Left Column: Typography and Controls */}
         <div className="flex flex-col">
@@ -223,22 +218,16 @@ const page = () => {
           <div className="flex items-center gap-4 mb-8">
             <div className="h-0.5 w-12 bg-(--accent-primary)"></div>
             <span className="text-(--accent-primary) text-xs font-bold tracking-[0.2em] uppercase">
-              <AnimateWords.StringProp
-                text="Deployed_Version_0.4.0"
-                speed={150}
-              />
+              Deployed_Version_0.4.0
             </span>
           </div>
 
           <div className="transition-all text-2xl sm:text-3xl md:text-4xl font-bold mb-2 whitespace-pre bg-linear-to-b from-(--text-primary) to-(--accent-primary) bg-clip-text text-transparent">
-            <AnimateWords.ArrayOfStringProps
-              array={[
-                "ASSOCIATION FOR",
-                "COMPUTER MACHINARY",
-                "- STUDENT CHAPTER",
-              ]}
-              speed={50}
-            />
+            {["ASSOCIATION FOR", "COMPUTER MACHINARY", "- STUDENT CHAPTER"].map(
+              (str) => {
+                return <h1 key={str}>{str}</h1>;
+              },
+            )}
           </div>
 
           {/* Body Text */}

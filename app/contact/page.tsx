@@ -146,7 +146,7 @@ export default function App() {
                         Follow us on LinkenIn
                       </p>
                       <p className="text-md leading-relaxed">
-                        Get quick updates
+                        Know about our recent events
                       </p>
                     </div>
                   </Link>
